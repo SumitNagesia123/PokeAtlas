@@ -1,0 +1,478 @@
+<title>PokéAtlas — Project Showcase</title>
+<style>
+  :root {
+    --color-bg: #f8f7f4;
+    --color-surface: #ffffff;
+    --color-border: #e5e3e0;
+    --color-text: #1a1a1a;
+    --color-text-muted: #6b6b6b;
+    --color-accent: #e3350d;
+    --color-accent-light: #fff5f2;
+    --color-success: #10b981;
+    --color-blue: #3b82f6;
+    --color-purple: #7c3aed;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-bg: #0a0a0f;
+      --color-surface: #1a1a24;
+      --color-border: #2e2e44;
+      --color-text: #f0f0f8;
+      --color-text-muted: #c4c4d6;
+      --color-accent: #ff6b4a;
+      --color-accent-light: #2d1510;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --color-bg: #0a0a0f;
+    --color-surface: #1a1a24;
+    --color-border: #2e2e44;
+    --color-text: #f0f0f8;
+    --color-text-muted: #c4c4d6;
+    --color-accent: #ff6b4a;
+    --color-accent-light: #2d1510;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* Header */
+  header {
+    border-bottom: 1px solid var(--color-border);
+    padding: 24px 0;
+    background: var(--color-surface);
+    sticky: top;
+    z-index: 10;
+  }
+
+  header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 20px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #e3350d 0%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--color-accent-light);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .status-pill::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Hero */
+  .hero {
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+
+  .hero p {
+    font-size: 20px;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto 32px;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background: var(--color-accent);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(227, 53, 13, 0.3);
+  }
+
+  .btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-bg);
+  }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 60px 0;
+  }
+
+  .stat {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Features */
+  .features {
+    padding: 60px 0;
+  }
+
+  .features h2 {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 40px;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .feature-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-accent);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--color-accent-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .feature-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* Pages */
+  .pages {
+    padding: 60px 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .pages h2 {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 40px;
+  }
+
+  .page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  .page-badge {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 16px 12px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .page-badge:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  /* Tech Stack */
+  .tech {
+    padding: 60px 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .tech h2 {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 40px;
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+  }
+
+  .tech-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--color-border);
+    padding: 40px 0;
+    margin-top: 60px;
+    background: var(--color-surface);
+    text-align: center;
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .link {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .link:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 32px;
+    }
+
+    .hero p {
+      font-size: 16px;
+    }
+
+    .cta-group {
+      flex-direction: column;
+    }
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<header>
+  <div class="container">
+    <div class="logo">🔴 PokéAtlas</div>
+    <div class="status-pill">Live on localhost:5173</div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <h1>PokéAtlas</h1>
+      <p>A modern, polished Pokémon discovery platform built with React, TypeScript, and Tailwind CSS</p>
+      <div class="cta-group">
+        <a href="http://localhost:5173" target="_blank" class="btn btn-primary">
+          ▶ Open Website
+        </a>
+        <a href="http://localhost:5173/pokedex" target="_blank" class="btn btn-secondary">
+          Browse Pokédex
+        </a>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+      <div class="stat">
+        <div class="stat-number">1025+</div>
+        <div class="stat-label">Pokémon</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">9</div>
+        <div class="stat-label">Generations</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">18</div>
+        <div class="stat-label">Types</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">8</div>
+        <div class="stat-label">Pages</div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+      <h2>Key Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>Smart Search</h3>
+          <p>Search Pokémon by name or Pokédex number with debounced, instant suggestions</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Type Filter</h3>
+          <p>Browse by elemental type with visual type-effectiveness relationships</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">❤️</div>
+          <h3>Favorites</h3>
+          <p>Save favorite Pokémon with localStorage persistence across sessions</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Detailed Stats</h3>
+          <p>Animated stat bars, evolution chains, abilities, moves, and more</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌓</div>
+          <h3>Dark Mode</h3>
+          <p>Full dark mode support with proper contrast and theme persistence</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Compare Tool</h3>
+          <p>Compare 2-4 Pokémon side-by-side with stats visualization</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pages -->
+    <section class="pages">
+      <h2>Website Pages</h2>
+      <div class="page-grid">
+        <div class="page-badge">🏠 Home</div>
+        <div class="page-badge">📖 Pokédex</div>
+        <div class="page-badge">🔍 Details</div>
+        <div class="page-badge">⚡ Types</div>
+        <div class="page-badge">🌍 Generations</div>
+        <div class="page-badge">⚖️ Compare</div>
+        <div class="page-badge">❤️ Favorites</div>
+        <div class="page-badge">404 Error</div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech">
+      <h2>Technology</h2>
+      <div class="tech-grid">
+        <div class="tech-item">React 18</div>
+        <div class="tech-item">TypeScript</div>
+        <div class="tech-item">Vite</div>
+        <div class="tech-item">Tailwind CSS</div>
+        <div class="tech-item">React Router</div>
+        <div class="tech-item">Axios</div>
+        <div class="tech-item">Lucide Icons</div>
+        <div class="tech-item">PokéAPI</div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>✨ Built with care •
+    <a href="http://localhost:5173" target="_blank" class="link">Live Site</a> •
+    <a href="https://pokeapi.co" target="_blank" class="link">PokéAPI</a></p>
+  </div>
+</footer>

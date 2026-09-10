@@ -9,6 +9,7 @@ import PokemonDetail from './pages/PokemonDetail';
 import Types from './pages/Types';
 import TypeDetail from './pages/TypeDetail';
 import Generations from './pages/Generations';
+import GenerationDetail from './pages/GenerationDetail';
 import Compare from './pages/Compare';
 import Favorites from './pages/Favorites';
 import NotFound from './pages/NotFound';
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: 'types', element: <Types /> },
       { path: 'types/:typeName', element: <TypeDetail /> },
       { path: 'generations', element: <Generations /> },
+      { path: 'generations/:generationId', element: <GenerationDetail /> },
       { path: 'compare', element: <Compare /> },
       { path: 'favorites', element: <Favorites /> },
       { path: '*', element: <NotFound /> },

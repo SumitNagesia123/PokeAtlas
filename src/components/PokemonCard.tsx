@@ -78,6 +78,16 @@ export function PokemonCard({ pokemon, className, delay = 0 }: PokemonCardProps)
         </Link>
 
         <div className="flex justify-center gap-2 flex-wrap relative z-10">
+          {pokemon.is_legendary && (
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300">
+              Legendary
+            </span>
+          )}
+          {pokemon.is_mythical && (
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300">
+              Mythical
+            </span>
+          )}
           {pokemon.types.map(({ type }) => (
             <TypeBadge key={type.name} type={type.name} size="sm" />
           ))}

@@ -19,7 +19,7 @@ import type { EvolutionChainLink } from '../types/pokemon';
 
 export default function PokemonDetail() {
   const { name } = useParams<{ name: string }>();
-  const { pokemon, species, evolution, loading, error } = usePokemon(name || '');
+  const { data: pokemon, loading, error } = usePokemon(name || '');
   const { isFavorite, toggleFavorite } = useFavorites();
 
   if (loading) {
@@ -84,8 +84,8 @@ export default function PokemonDetail() {
     );
   };
 
-  const flavorText = species?.flavor_text_entries.find(
-    entry => entry.language.name === 'en'
+  const flavorText = (pokemon as any)?.species?.flavor_text_entries?.find(
+    (entry: any) => entry.language.name === 'en'
   )?.flavor_text;
 
   return (
@@ -181,7 +181,7 @@ export default function PokemonDetail() {
           <div className="space-y-3 pt-4 border-t border-gray-100 dark:border-gray-700">
             <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400">Abilities</h3>
             <div className="flex flex-wrap gap-2">
-              {pokemon.abilities.map(a => (
+              {pokemon.abilities.map((a: any) => (
                 <span
                   key={a.ability.name}
                   className="px-3 py-1 bg-gray-100 dark:bg-dark-700 text-gray-800 dark:text-gray-200 rounded-lg text-xs font-semibold capitalize"
@@ -201,7 +201,7 @@ export default function PokemonDetail() {
           </h2>
 
           <div className="space-y-4">
-            {pokemon.stats.map(stat => (
+            {pokemon.stats.map((stat: any) => (
               <StatBar
                 key={stat.stat.name}
                 name={stat.stat.name}
@@ -211,7 +211,7 @@ export default function PokemonDetail() {
             <div className="pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between font-bold text-sm">
               <span className="text-gray-500">Total Base Stats</span>
               <span className="text-gray-900 dark:text-white">
-                {pokemon.stats.reduce((acc, curr) => acc + curr.base_stat, 0)}
+                {pokemon.stats.reduce((acc: number, curr: any) => acc + curr.base_stat, 0)}
               </span>
             </div>
           </div>
@@ -221,8 +221,8 @@ export default function PokemonDetail() {
       {/* Evolution Chain Section */}
       <div className="p-6 sm:p-8 bg-white dark:bg-dark-800 rounded-3xl border border-gray-100 dark:border-gray-800 space-y-6">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">Evolution Chain</h2>
-        {evolution ? (
-          renderEvolutions(evolution.chain)
+        {(pokemon as any)?.evolution ? (
+          renderEvolutions((pokemon as any).evolution.chain)
         ) : (
           <p className="text-gray-400 text-sm">No evolution data available.</p>
         )}
@@ -232,7 +232,7 @@ export default function PokemonDetail() {
       <div className="p-6 sm:p-8 bg-white dark:bg-dark-800 rounded-3xl border border-gray-100 dark:border-gray-800 space-y-6">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">Moves ({pokemon.moves.length})</h2>
         <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto pr-2">
-          {pokemon.moves.map(m => (
+          {pokemon.moves.map((m: any) => (
             <span
               key={m.move.name}
               className="px-3 py-1.5 bg-gray-50 dark:bg-dark-700/50 border border-gray-100 dark:border-gray-700 rounded-xl text-xs font-medium text-gray-700 dark:text-gray-300 capitalize"

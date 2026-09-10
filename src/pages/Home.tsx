@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, Shuffle, Shield, Zap, Flame, Award } from 'lucide-react';
-import { getPokemonBatch, getPokemon } from '../services/pokemonApi';
+import { getPokemonBatchWithSpecies, getPokemonWithSpecies } from '../services/pokemonApi';
 import { PokemonCard } from '../components/PokemonCard';
 import { PokemonCardSkeleton } from '../components/SkeletonLoader';
 import { ALL_TYPES, TYPE_COLORS, formatName, randomInt, getArtworkUrl } from '../utils/pokemon';
@@ -20,7 +20,7 @@ export default function Home() {
       try {
         // Fetch classic iconic starter/legendary pokemon
         const ids = [1, 4, 7, 25, 150, 133, 94, 384];
-        const data = await getPokemonBatch(ids);
+        const data = await getPokemonBatchWithSpecies(ids);
         setFeaturedPokemon(data);
       } catch (err) {
         console.error(err);
@@ -37,7 +37,7 @@ export default function Home() {
     setLoadingRandom(true);
     try {
       const randomId = randomInt(1, 1025);
-      const data = await getPokemon(randomId);
+      const data = await getPokemonWithSpecies(randomId);
       setRandomPoke(data);
     } catch (err) {
       console.error(err);

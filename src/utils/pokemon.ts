@@ -42,15 +42,6 @@ export const TYPE_GRADIENTS: Record<string, string> = {
   fairy: 'from-pink-300 to-pink-500',
 };
 
-/** Type icons (using emoji as fallback, components use Lucide) */
-export const TYPE_ICONS: Record<string, string> = {
-  normal: '⚪', fire: '🔥', water: '💧', electric: '⚡',
-  grass: '🌿', ice: '❄️', fighting: '🥊', poison: '☠️',
-  ground: '🌍', flying: '🌪️', psychic: '🔮', bug: '🐛',
-  rock: '🪨', ghost: '👻', dragon: '🐉', dark: '🌑',
-  steel: '⚙️', fairy: '✨',
-};
-
 /** Generation info */
 export const GENERATION_INFO: Record<string, { region: string; range: [number, number] }> = {
   'generation-i': { region: 'Kanto', range: [1, 151] },

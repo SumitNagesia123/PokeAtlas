@@ -30,6 +30,7 @@ export default function TypeDetail() {
   }
 
   if (error || !typeData) {
+    return <div>Error loading type data</div>;
   }
 
   const typeColor = TYPE_COLORS[typeName || 'normal'];
@@ -52,7 +53,7 @@ export default function TypeDetail() {
             {formatName(typeName || '')} Type
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">
-            {typeData.pokemon.length} Pokémon • {typeData.moves.length} Moves
+            {typeData?.pokemon.length} Pokémon • {typeData?.moves.length} Moves
           </p>
         </div>
       </div>
@@ -67,39 +68,39 @@ export default function TypeDetail() {
           </div>
 
           <div className="space-y-4">
-            {typeData.damage_relations.double_damage_to.length > 0 && (
+            {typeData?.damage_relations.double_damage_to.length > 0 && (
               <div>
                 <p className="text-sm font-semibold text-green-600 dark:text-green-400 mb-2">
                   Super Effective Against
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {typeData.damage_relations.double_damage_to.map(t => (
+                  {typeData.damage_relations.double_damage_to.map((t: any) => (
                     <TypeBadge key={t.name} type={t.name} size="sm" />
                   ))}
                 </div>
               </div>
             )}
 
-            {typeData.damage_relations.half_damage_to.length > 0 && (
+            {typeData?.damage_relations.half_damage_to.length > 0 && (
               <div>
                 <p className="text-sm font-semibold text-yellow-600 dark:text-yellow-400 mb-2">
                   Not Very Effective Against
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {typeData.damage_relations.half_damage_to.map(t => (
+                  {typeData.damage_relations.half_damage_to.map((t: any) => (
                     <TypeBadge key={t.name} type={t.name} size="sm" />
                   ))}
                 </div>
               </div>
             )}
 
-            {typeData.damage_relations.no_damage_to.length > 0 && (
+            {typeData?.damage_relations.no_damage_to.length > 0 && (
               <div>
                 <p className="text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2">
                   No Effect Against
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {typeData.damage_relations.no_damage_to.map(t => (
+                  {typeData.damage_relations.no_damage_to.map((t: any) => (
                     <TypeBadge key={t.name} type={t.name} size="sm" />
                   ))}
                 </div>
@@ -116,39 +117,39 @@ export default function TypeDetail() {
           </div>
 
           <div className="space-y-4">
-            {typeData.damage_relations.double_damage_from.length > 0 && (
+            {typeData?.damage_relations.double_damage_from.length > 0 && (
               <div>
                 <p className="text-sm font-semibold text-red-600 dark:text-red-400 mb-2">
                   Weak Against
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {typeData.damage_relations.double_damage_from.map(t => (
+                  {typeData.damage_relations.double_damage_from.map((t: any) => (
                     <TypeBadge key={t.name} type={t.name} size="sm" />
                   ))}
                 </div>
               </div>
             )}
 
-            {typeData.damage_relations.half_damage_from.length > 0 && (
+            {typeData?.damage_relations.half_damage_from.length > 0 && (
               <div>
                 <p className="text-sm font-semibold text-green-600 dark:text-green-400 mb-2">
                   Resistant Against
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {typeData.damage_relations.half_damage_from.map(t => (
+                  {typeData.damage_relations.half_damage_from.map((t: any) => (
                     <TypeBadge key={t.name} type={t.name} size="sm" />
                   ))}
                 </div>
               </div>
             )}
 
-            {typeData.damage_relations.no_damage_from.length > 0 && (
+            {typeData?.damage_relations.no_damage_from.length > 0 && (
               <div>
                 <p className="text-sm font-semibold text-purple-600 dark:text-purple-400 mb-2">
                   Immune To
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {typeData.damage_relations.no_damage_from.map(t => (
+                  {typeData.damage_relations.no_damage_from.map((t: any) => (
                     <TypeBadge key={t.name} type={t.name} size="sm" />
                   ))}
                 </div>

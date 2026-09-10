@@ -1,8 +1,8 @@
 import { useFavorites } from '../context/FavoritesContext';
 import { usePokemonBatch } from '../hooks/usePokemon';
 import { PokemonCard } from '../components/PokemonCard';
-
 import { SkeletonLoader } from '../components/SkeletonLoader';
+import { EmptyState } from '../components/EmptyState';
 
 export default function Favorites() {
   const { favorites } = useFavorites();
@@ -10,6 +10,7 @@ export default function Favorites() {
 
   if (favorites.length === 0) {
     return (
+      <EmptyState
         title="Your Pokédex is empty"
         message="You haven't favorited any Pokémon yet."
         action={{ label: 'Explore Pokémon', href: '/pokedex' }}
@@ -27,7 +28,7 @@ export default function Favorites() {
         </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {pokemonList?.map(pokemon => (
+          {pokemonList?.map((pokemon: any) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
           ))}
         </div>

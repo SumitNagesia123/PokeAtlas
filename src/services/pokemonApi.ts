@@ -115,12 +115,39 @@ export async function getMove(
 }
 
 /**
+ * Fetch a single Pokémon with species data (is_legendary, is_mythical) merged in.
+ */
+export async function getPokemonWithSpecies(
+  nameOrId: string | number,
+): Promise<Pokemon> {
+  const [pokemon, species] = await Promise.all([
+    getPokemon(nameOrId),
+    getPokemonSpecies(nameOrId),
+  ]);
+  return {
+    ...pokemon,
+    is_legendary: species.is_legendary,
+    is_mythical: species.is_mythical,
+  };
+}
+
+/**
  * Fetch multiple Pokémon by their IDs efficiently.
  */
 export async function getPokemonBatch(
   ids: number[],
 ): Promise<Pokemon[]> {
   const promises = ids.map(id => getPokemon(id));
+  return Promise.all(promises);
+}
+
+/**
+ * Fetch multiple Pokémon by their IDs with species data (is_legendary, is_mythical).
+ */
+export async function getPokemonBatchWithSpecies(
+  ids: number[],
+): Promise<Pokemon[]> {
+  const promises = ids.map(id => getPokemonWithSpecies(id));
   return Promise.all(promises);
 }
 

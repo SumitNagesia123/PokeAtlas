@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { pokemonApi } from '../services/pokemonApi';
+import { pokemonApi, getPokemonWithSpecies } from '../services/pokemonApi';
 import { PokemonCard } from './PokemonCard';
 import { PokemonCardSkeleton } from './SkeletonLoader';
 import type { Pokemon } from '../types/pokemon';
@@ -35,7 +35,7 @@ export function PokemonList({
 
         // Fetch detailed data for each pokemon to display the card properly
         const detailedPokemon = await Promise.all(
-          list.results.map(p => pokemonApi.getPokemon(p.name))
+          list.results.map(p => getPokemonWithSpecies(p.name))
         );
 
         if (isMounted) {
